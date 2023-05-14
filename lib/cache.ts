@@ -1,46 +1,34 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { CacheMapper } from './CacheMapper';
 
-export = class Cache<T> {
-  cache: Map<string, T>;
-
+export = class Cache<V> {
+  cache: CacheMapper<string, V>;
   constructor() {
-    this.cache = new Map();
+    this.cache = new CacheMapper<string, V>();
   }
-
-  set(id: string, value: T) {
-    this.cache.set(id, value);
+  has(key: string) {
+    return this.cache.has(key);
   }
-
-  has(id: string) {
-    return this.cache.has(id);
+  get(key: string) {
+    return this.cache.get(key);
   }
-
-  get(id: string) {
-    return this.cache.get(id);
+  set(key: string, value: V) {
+    return this.cache.set(key, value);
   }
-
-  del(id: string) {
-    this.cache.delete(id);
+  dump() {
+    return Object.fromEntries(this.cache);
   }
-
-  apply(id: string, value: any): T {
-    if (this.has(id)) return this.get(id);
-
-    if (typeof value === 'function') value = value();
-
-    this.set(id, value);
-    return value;
-  }
-
-  flush() {
-    this.cache.clear();
-  }
-
   size() {
     return this.cache.size;
   }
-
-  dump() {
-    return Object.fromEntries(this.cache);
+  apply(key: string, value: V): V;
+  apply(key: string, value: () => V): V;
+  apply(key: string, value: (() => V) | V) {
+    return this.cache.apply(key, value);
+  }
+  del(key: string) {
+    return this.cache.del(key);
+  }
+  flush() {
+    return this.cache.flush();
   }
 };
