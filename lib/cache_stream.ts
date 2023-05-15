@@ -9,8 +9,16 @@ class CacheStream extends Transform {
     this._cache = [];
   }
 
-  _transform(chunk, enc, callback) {
-    const buf = chunk instanceof Buffer ? chunk : Buffer.from(chunk, enc);
+  _transform(
+    chunk:
+      | WithImplicitCoercion<string>
+      | {
+          [Symbol.toPrimitive](hint: 'string'): string;
+        },
+    enc: BufferEncoding,
+    callback: () => void
+  ) {
+    const buf = chunk instanceof Buffer ? chunk : Buffer.from(chunk, enc as BufferEncoding);
     this._cache.push(buf);
     this.push(buf);
     callback();
