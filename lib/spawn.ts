@@ -1,7 +1,7 @@
 import spawn from 'cross-spawn';
 import CacheStream from './cache_stream';
-
 import { SpawnOptions } from 'child_process';
+
 interface Options extends SpawnOptions {
   verbose?: boolean;
   encoding?: BufferEncoding;
