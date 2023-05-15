@@ -2,10 +2,12 @@ import escapeRegExp from './escape_regexp';
 
 const rParam = /([:*])([\w?]*)?/g;
 
-class Pattern {
-  match: (str: string) => any;
+type PatternMatchResult = RegExpMatchArray | Record<string, unknown>;
 
-  constructor(rule: Pattern | ((str: string) => any) | RegExp | string) {
+class Pattern {
+  match: (str: string) => PatternMatchResult;
+
+  constructor(rule: Pattern | ((str: string) => PatternMatchResult) | RegExp | string) {
     if (rule instanceof Pattern) {
       return rule;
     } else if (typeof rule === 'function') {
