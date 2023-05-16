@@ -1,4 +1,4 @@
-import { Transform } from 'stream';
+import { Transform, TransformCallback } from 'stream';
 
 class CacheStream extends Transform {
   _cache: Buffer[];
@@ -16,9 +16,9 @@ class CacheStream extends Transform {
           [Symbol.toPrimitive](hint: 'string'): string;
         },
     enc: BufferEncoding,
-    callback: () => void
+    callback: TransformCallback
   ) {
-    const buf = chunk instanceof Buffer ? chunk : Buffer.from(chunk, enc as BufferEncoding);
+    const buf = chunk instanceof Buffer ? chunk : Buffer.from(chunk, enc);
     this._cache.push(buf);
     this.push(buf);
     callback();
