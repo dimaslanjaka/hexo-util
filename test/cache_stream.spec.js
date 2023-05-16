@@ -20,4 +20,7 @@ describe('CacheStream', () => {
       cacheStream.getCache().should.eql(content);
     });
   });
+
+  // typescript test
+  require('./ReadWriteStream.spec.ts');
 });
