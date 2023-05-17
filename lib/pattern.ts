@@ -2,7 +2,7 @@ import escapeRegExp from './escape_regexp';
 
 const rParam = /([:*])([\w?]*)?/g;
 
-type PatternMatchResult = RegExpMatchArray | Record<string, unknown>;
+type PatternMatchResult = boolean | RegExpMatchArray | Record<string, unknown>;
 
 class Pattern {
   match: (str: string) => PatternMatchResult;
