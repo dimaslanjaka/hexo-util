@@ -123,7 +123,7 @@ export class Cache<V> {
    * @param key cache key string
    * @param value cache value must same as constructor generic type
    */
-  apply(key: string, value: V): V;
+  apply(key: string, value: Partial<V | null>): V;
 
   /**
    * cacheable setter with function

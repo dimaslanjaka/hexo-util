@@ -1,74 +1,64 @@
 'use strict';
 
-const chai = require('chai');
-const should = chai.should();
-const expect = chai.expect;
+import chai from 'chai';
+import Cache from '../lib/cache';
+chai.should();
 
 describe('Cache', () => {
-  // const Cache = require('../dist').Cache; // <-- this also works
-  const Cache = require('../dist/cache');
-  const cache = new Cache();
+  const cache = new Cache<number>();
 
   it('get & set', () => {
     cache.set('foo', 123);
-    should.equal(cache.get('foo'), 123);
+    cache.get('foo')!.should.eql(123);
   });
 
   it('size', () => {
     cache.set('foobar', 456);
-    should.equal(cache.size(), 2);
+    cache.size().should.eql(2);
   });
 
   it('has', () => {
-    should.equal(cache.has('foo'), true);
-    should.equal(cache.has('bar'), false);
+    cache.has('foo').should.eql(true);
+    cache.has('bar').should.eql(false);
   });
 
   it('apply - non function', () => {
-    should.equal(cache.apply('bar', 123), 123);
-    should.equal(cache.apply('bar', 456), 123);
-    should.equal(cache.apply('foo', 456), 123);
+    cache.apply('bar', 123).should.eql(123);
+    cache.apply('bar', 456).should.eql(123);
+
+    cache.apply('foo', 456).should.eql(123);
   });
 
   it('apply - function', () => {
-    should.equal(
-      cache.apply('baz', () => 123),
-      123
-    );
-    should.equal(
-      cache.apply('baz', () => 456),
-      123
-    );
+    cache.apply('baz', () => 123).should.eql(123);
+    cache.apply('baz', () => 456).should.eql(123);
   });
 
   it('dump', () => {
-    expect(cache.dump()).to.include({
-      bar: 123,
-      baz: 123,
-      foo: 123,
-      foobar: 456
+    cache.dump().should.eql({
+      'bar': 123,
+      'baz': 123,
+      'foo': 123,
+      'foobar': 456
     });
   });
 
   it('del', () => {
     cache.del('baz');
-    should.equal(cache.has('foo'), true);
-    should.equal(cache.has('baz'), false);
+    cache.has('foo').should.eql(true);
+    cache.has('baz').should.eql(false);
   });
 
   it('flush', () => {
     cache.flush();
-    should.equal(cache.has('foo'), false);
-    should.equal(cache.has('bar'), false);
-    should.equal(cache.has('baz'), false);
-    should.equal(cache.size(), 0);
+    cache.has('foo').should.eql(false);
+    cache.has('bar').should.eql(false);
+    cache.has('baz').should.eql(false);
+    cache.size().should.eql(0);
   });
 
   it('cache null', () => {
     cache.apply('foo', null);
-    should.equal(cache.apply('foo', 123) === null, true);
+    (cache.apply('foo', 123) === null).should.eql(true);
   });
-
-  // include typescript test
-  require('./cache-typescript.spec.ts');
 });
