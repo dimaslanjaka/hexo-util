@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use strict';
 
 import { Cache } from '../lib';
 import { describe, it } from 'mocha';
