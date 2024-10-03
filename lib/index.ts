@@ -1,6 +1,6 @@
 export { default as Cache } from './cache';
 export { default as CacheStream } from './cache_stream';
-export { CacheMapper } from './CacheMapper';
+export { CacheMapper as InternalCacheMapper, Cache as CacheMapper, CacheType } from './CacheMapper';
 export { default as camelCaseKeys } from './camel_case_keys';
 export { default as Color } from './color';
 export { default as decodeURL } from './decode_url';
