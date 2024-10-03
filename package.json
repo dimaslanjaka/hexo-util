@@ -41,7 +41,7 @@
     "@types/chai": "^4.3.5",
     "@types/cross-spawn": "^6.0.2",
     "@types/mocha": "^10.0.1",
-    "@types/node": "^18.11.8",
+    "@types/node": "^22.7.4",
     "@types/prismjs": "^1.26.0",
     "@types/rewire": "^2.5.30",
     "c8": "^9.1.0",
