@@ -34,10 +34,10 @@ describe('Cache', () => {
 
   it('dump', () => {
     cache.dump().should.eql({
-      bar: 123,
-      baz: 123,
-      foo: 123,
-      foobar: 456
+      'bar': 123,
+      'baz': 123,
+      'foo': 123,
+      'foobar': 456
     });
   });
 
