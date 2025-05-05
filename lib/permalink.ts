@@ -18,7 +18,7 @@ class Permalink {
     const segments = options.segments || {};
     const params = [];
     const regex = escapeRegExp(rule)
-      .replace(rParam, (match, name) => {
+      .replace(rParam, (_match, name) => {
         params.push(name);
         if (Object.prototype.hasOwnProperty.call(segments, name)) {
           const segment = segments[name];
@@ -49,8 +49,8 @@ class Permalink {
     return result;
   }
 
-  stringify(data) {
-    return this.rule.replace(rParam, (match, name) => {
+  stringify(data: Record<string, any>) {
+    return this.rule.replace(rParam, (_match, name) => {
       const descriptor = Object.getOwnPropertyDescriptor(data, name);
       if (descriptor && typeof descriptor.get === 'function') {
         throw new Error('Invalid permalink setting!');
