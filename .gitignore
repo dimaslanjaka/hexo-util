@@ -9,3 +9,4 @@ coverage/
 dist/
 package-lock.json
 .vscode/
+*.patch
