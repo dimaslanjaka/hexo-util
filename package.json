@@ -11,8 +11,167 @@
       "require": "./dist/cjs/index.js",
       "types": "./dist/esm/index.d.ts"
     },
-    "./highlight_alias.json": "./highlight_alias.json",
-    "./dist/highlight_alias.json": "./highlight_alias.json"
+    "./dist/CacheMapper": {
+      "import": "./dist/esm/CacheMapper.js",
+      "require": "./dist/cjs/CacheMapper.js",
+      "types": "./dist/esm/CacheMapper.ts"
+    },
+    "./dist/cache": {
+      "import": "./dist/esm/cache.js",
+      "require": "./dist/cjs/cache.js",
+      "types": "./dist/esm/cache.ts"
+    },
+    "./dist/cache_stream": {
+      "import": "./dist/esm/cache_stream.js",
+      "require": "./dist/cjs/cache_stream.js",
+      "types": "./dist/esm/cache_stream.ts"
+    },
+    "./dist/camel_case_keys": {
+      "import": "./dist/esm/camel_case_keys.js",
+      "require": "./dist/cjs/camel_case_keys.js",
+      "types": "./dist/esm/camel_case_keys.ts"
+    },
+    "./dist/color": {
+      "import": "./dist/esm/color.js",
+      "require": "./dist/cjs/color.js",
+      "types": "./dist/esm/color.ts"
+    },
+    "./dist/decode_url": {
+      "import": "./dist/esm/decode_url.js",
+      "require": "./dist/cjs/decode_url.js",
+      "types": "./dist/esm/decode_url.ts"
+    },
+    "./dist/deep_merge": {
+      "import": "./dist/esm/deep_merge.js",
+      "require": "./dist/cjs/deep_merge.js",
+      "types": "./dist/esm/deep_merge.ts"
+    },
+    "./dist/encode_url": {
+      "import": "./dist/esm/encode_url.js",
+      "require": "./dist/cjs/encode_url.js",
+      "types": "./dist/esm/encode_url.ts"
+    },
+    "./dist/escape_diacritic": {
+      "import": "./dist/esm/escape_diacritic.js",
+      "require": "./dist/cjs/escape_diacritic.js",
+      "types": "./dist/esm/escape_diacritic.ts"
+    },
+    "./dist/escape_html": {
+      "import": "./dist/esm/escape_html.js",
+      "require": "./dist/cjs/escape_html.js",
+      "types": "./dist/esm/escape_html.ts"
+    },
+    "./dist/escape_regexp": {
+      "import": "./dist/esm/escape_regexp.js",
+      "require": "./dist/cjs/escape_regexp.js",
+      "types": "./dist/esm/escape_regexp.ts"
+    },
+    "./dist/full_url_for": {
+      "import": "./dist/esm/full_url_for.js",
+      "require": "./dist/cjs/full_url_for.js",
+      "types": "./dist/esm/full_url_for.ts"
+    },
+    "./dist/gravatar": {
+      "import": "./dist/esm/gravatar.js",
+      "require": "./dist/cjs/gravatar.js",
+      "types": "./dist/esm/gravatar.ts"
+    },
+    "./dist/hash": {
+      "import": "./dist/esm/hash.js",
+      "require": "./dist/cjs/hash.js",
+      "types": "./dist/esm/hash.ts"
+    },
+    "./dist/highlight": {
+      "import": "./dist/esm/highlight.js",
+      "require": "./dist/cjs/highlight.js",
+      "types": "./dist/esm/highlight.ts"
+    },
+    "./dist/html_tag": {
+      "import": "./dist/esm/html_tag.js",
+      "require": "./dist/cjs/html_tag.js",
+      "types": "./dist/esm/html_tag.ts"
+    },
+    "./dist/index": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/esm/index.ts"
+    },
+    "./dist/is_external_link": {
+      "import": "./dist/esm/is_external_link.js",
+      "require": "./dist/cjs/is_external_link.js",
+      "types": "./dist/esm/is_external_link.ts"
+    },
+    "./dist/pattern": {
+      "import": "./dist/esm/pattern.js",
+      "require": "./dist/cjs/pattern.js",
+      "types": "./dist/esm/pattern.ts"
+    },
+    "./dist/permalink": {
+      "import": "./dist/esm/permalink.js",
+      "require": "./dist/cjs/permalink.js",
+      "types": "./dist/esm/permalink.ts"
+    },
+    "./dist/pretty_urls": {
+      "import": "./dist/esm/pretty_urls.js",
+      "require": "./dist/cjs/pretty_urls.js",
+      "types": "./dist/esm/pretty_urls.ts"
+    },
+    "./dist/prism": {
+      "import": "./dist/esm/prism.js",
+      "require": "./dist/cjs/prism.js",
+      "types": "./dist/esm/prism.ts"
+    },
+    "./dist/relative_url": {
+      "import": "./dist/esm/relative_url.js",
+      "require": "./dist/cjs/relative_url.js",
+      "types": "./dist/esm/relative_url.ts"
+    },
+    "./dist/slugize": {
+      "import": "./dist/esm/slugize.js",
+      "require": "./dist/cjs/slugize.js",
+      "types": "./dist/esm/slugize.ts"
+    },
+    "./dist/spawn": {
+      "import": "./dist/esm/spawn.js",
+      "require": "./dist/cjs/spawn.js",
+      "types": "./dist/esm/spawn.ts"
+    },
+    "./dist/strip_html": {
+      "import": "./dist/esm/strip_html.js",
+      "require": "./dist/cjs/strip_html.js",
+      "types": "./dist/esm/strip_html.ts"
+    },
+    "./dist/strip_indent": {
+      "import": "./dist/esm/strip_indent.js",
+      "require": "./dist/cjs/strip_indent.js",
+      "types": "./dist/esm/strip_indent.ts"
+    },
+    "./dist/toc_obj": {
+      "import": "./dist/esm/toc_obj.js",
+      "require": "./dist/cjs/toc_obj.js",
+      "types": "./dist/esm/toc_obj.ts"
+    },
+    "./dist/truncate": {
+      "import": "./dist/esm/truncate.js",
+      "require": "./dist/cjs/truncate.js",
+      "types": "./dist/esm/truncate.ts"
+    },
+    "./dist/unescape_html": {
+      "import": "./dist/esm/unescape_html.js",
+      "require": "./dist/cjs/unescape_html.js",
+      "types": "./dist/esm/unescape_html.ts"
+    },
+    "./dist/url_for": {
+      "import": "./dist/esm/url_for.js",
+      "require": "./dist/cjs/url_for.js",
+      "types": "./dist/esm/url_for.ts"
+    },
+    "./dist/word_wrap": {
+      "import": "./dist/esm/word_wrap.js",
+      "require": "./dist/cjs/word_wrap.js",
+      "types": "./dist/esm/word_wrap.ts"
+    },
+    "./highlight_alias.json": "./highlight_alias.json"
   },
   "scripts": {
     "build:cjs": "tsc -p tsconfig.cjs.json",
