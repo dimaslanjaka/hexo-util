@@ -5,10 +5,7 @@ const rParam = /([:*])([\w?]*)?/g;
 export class Pattern {
   match: (str: string) => any;
 
-class Pattern {
-  match: (str: string) => PatternMatchResult;
-
-  constructor(rule: Pattern | ((str: string) => PatternMatchResult) | RegExp | string) {
+  constructor(rule: Pattern | ((str: string) => any) | RegExp | string) {
     if (rule instanceof Pattern) {
       return rule;
     } else if (typeof rule === 'function') {

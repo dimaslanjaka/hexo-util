@@ -1,24 +1,23 @@
-import PrismCore from 'prismjs';
-import prismLoadLanguages from 'prismjs/components/index.js';
 import stripIndent from 'strip-indent';
+import prismLoadLanguages from 'prismjs/components/';
 
 let Prism: typeof import('prismjs') | undefined;
 
-const prismAlias = Object.entries(PrismCore.languages).reduce((acc, [key, value]) => {
-  if (value && typeof value === 'object' && 'alias' in value) {
-    const alias = (value as { alias?: string | string[] }).alias;
-    if (alias) {
-      if (Array.isArray(alias)) {
-        alias.forEach(a => (acc[a] = key));
-      } else if (typeof alias === 'string') {
-        acc[alias] = key;
-      }
+// https://github.com/PrismJS/prism/issues/2145
+import prismComponents from 'prismjs/components';
+
+const prismAlias = Object.entries(prismComponents.languages).reduce((acc, [key, value]) => {
+  if (value.alias) {
+    if (Array.isArray(value.alias)) {
+      value.alias.forEach(alias => (acc[alias] = key));
+    } else if (typeof value.alias === 'string') {
+      acc[value.alias] = key;
     }
   }
   return acc;
-}, {} as Record<string, string>);
+}, {});
 
-const prismSupportedLanguages = Object.keys(PrismCore.languages).concat(Object.keys(prismAlias));
+const prismSupportedLanguages = Object.keys(prismComponents.languages).concat(Object.keys(prismAlias));
 
 import escapeHTML from './escape_html';
 
@@ -88,35 +87,9 @@ export function PrismUtil(str: string, options: Options = {}) {
   }
 
   // To be consistent with highlight.js
-  // Normalize language aliases to canonical Prism names
   let language = lang === 'plaintext' || lang === 'none' ? 'none' : lang;
-  // Manual alias mapping for common cases
-  const manualAlias: Record<string, string> = {
-    js: 'javascript',
-    ts: 'typescript',
-    py: 'python',
-    rb: 'ruby',
-    sh: 'bash',
-    html: 'markup',
-    md: 'markdown',
-    csharp: 'cs',
-    shell: 'bash',
-    yml: 'yaml',
-    vue: 'markup',
-    plaintext: 'none',
-    none: 'none'
-  };
-  if (manualAlias[language]) language = manualAlias[language];
-  if (prismAlias[language]) language = prismAlias[language];
 
-  // Ensure Prism loads the language if not loaded
-  if (language !== 'none' && PrismCore && !PrismCore.languages[language]) {
-    try {
-      prismLoadLanguages(language);
-    } catch (e) {
-      // ignore
-    }
-  }
+  if (prismAlias[language]) language = prismAlias[language];
 
   const preTagClassArr = [];
   const preTagAttrArr = [];
@@ -154,25 +127,10 @@ export function PrismUtil(str: string, options: Options = {}) {
 
   let parsedCode = '';
 
-  // Always use Prism for supported languages, even if not loaded yet
-  if (language !== 'none' && isPreprocess && PrismCore.languages[language]) {
-    parsedCode = prismHighlight(str, language);
-  } else if (language !== 'none' && isPreprocess && Prism && Prism.languages[language]) {
-    parsedCode = prismHighlight(str, language);
-  } else if (language !== 'none' && isPreprocess) {
-    // Try to load language and highlight
-    try {
-      prismLoadLanguages(language);
-      if (PrismCore.languages[language]) {
-        parsedCode = prismHighlight(str, language);
-      } else {
-        parsedCode = escapeHTML(str);
-      }
-    } catch (e) {
-      parsedCode = escapeHTML(str);
-    }
-  } else {
+  if (language === 'none' || !isPreprocess) {
     parsedCode = escapeHTML(str);
+  } else {
+    parsedCode = prismHighlight(str, language);
   }
 
   // lineNumberUtil() should be used only under preprocess mode
