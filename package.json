@@ -178,7 +178,7 @@
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.esm.json",
     "build:exports": "node scripts/build_exports.mjs",
-    "build:highlight": "node scripts/build_highlight_alias.js",
+    "build:highlight": "node scripts/build_highlight_alias.mjs",
     "build": "npm run build:cjs && npm run build:esm && npm run build:highlight && npm run build:exports",
     "clean": "npx --yes rimraf dist tmp && npm run build",
     "prepublishOnly": "npm install && npm run clean && npm run build",
