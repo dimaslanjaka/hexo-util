@@ -4,7 +4,8 @@ tmp/
 *.log
 .idea/
 .nyc_output/
-highlight_alias.json
+**/highlight_alias.json
 coverage/
 dist/
 package-lock.json
+.vscode/
