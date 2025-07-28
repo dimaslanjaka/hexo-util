@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const packageJsonPath = path.join(__dirname, 'package.json');
+const packageJsonPath = path.join(__dirname, '../package.json');
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
 
 const defaultExports = {
@@ -13,10 +13,11 @@ const defaultExports = {
     'require': './dist/cjs/index.js',
     'types': './dist/esm/index.d.ts'
   },
-  './highlight_alias.json': './highlight_alias.json'
+  './highlight_alias.json': './highlight_alias.json',
+  './dist/highlight_alias.json': './highlight_alias.json'
 };
 
-fs.readdirSync(path.join(__dirname, 'lib')).forEach(file => {
+fs.readdirSync(path.join(__dirname, '../lib')).forEach(file => {
   defaultExports[`./dist/${file.replace('.ts', '')}`] = {
     'import': `./dist/esm/${file.replace('.ts', '.js')}`,
     'require': `./dist/cjs/${file.replace('.ts', '.js')}`,

@@ -1,5 +1,6 @@
 const hljs = require('highlight.js');
 const fs = require('fs');
+const path = require('path');
 
 const languages = hljs.listLanguages();
 const result = {
@@ -19,8 +20,12 @@ languages.forEach(lang => {
   }
 });
 
-const stream = fs.createWriteStream('highlight_alias.json');
-stream.write(JSON.stringify(result));
-stream.on('end', () => {
-  stream.end();
+const outputPaths = [
+  'highlight_alias.json',
+  'dist/highlight_alias.json'
+];
+
+outputPaths.forEach(outputPath => {
+  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+  fs.writeFileSync(outputPath, JSON.stringify(result));
 });
