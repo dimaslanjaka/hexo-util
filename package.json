@@ -102,6 +102,11 @@
       "require": "./dist/cjs/is_external_link.js",
       "types": "./dist/esm/is_external_link.ts"
     },
+    "./dist/json_stringify_circular": {
+      "import": "./dist/esm/json_stringify_circular.js",
+      "require": "./dist/cjs/json_stringify_circular.js",
+      "types": "./dist/esm/json_stringify_circular.ts"
+    },
     "./dist/pattern": {
       "import": "./dist/esm/pattern.js",
       "require": "./dist/cjs/pattern.js",
