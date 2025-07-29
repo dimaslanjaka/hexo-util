@@ -1,4 +1,3 @@
-import { parse } from 'url';
 import Cache from './cache.js';
 const cache = new Cache<boolean>();
 
@@ -14,7 +13,11 @@ export function isExternalLink(input: string, sitehost: string, exclude?: string
     // Return false early for internal link
     if (!/^(\/\/|http(s)?:)/.test(input)) return false;
 
-    sitehost = parse(sitehost).hostname || sitehost;
+    try {
+      sitehost = new URL(sitehost).hostname;
+    } catch {
+      // ignore error, use original sitehost
+    }
 
     if (!sitehost) return false;
 
@@ -22,7 +25,9 @@ export function isExternalLink(input: string, sitehost: string, exclude?: string
     let data;
     try {
       data = new URL(input, `http://${sitehost}`);
-    } catch (e) { }
+    } catch {
+      // ignore error, data will remain undefined
+    }
 
     // if input is invalid url, data should be undefined
     if (typeof data !== 'object') return false;
