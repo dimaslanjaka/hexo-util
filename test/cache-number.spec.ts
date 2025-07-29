@@ -1,7 +1,5 @@
-'use strict';
-
 import { describe, it } from 'mocha';
-import * as Hutil from '../lib';
+import * as Hutil from '../lib/index.js';
 import { expect } from 'chai';
 
 // to run single test
