@@ -87,6 +87,11 @@
       "require": "./dist/cjs/highlight.js",
       "types": "./dist/esm/highlight.ts"
     },
+    "./dist/highlight_alias": {
+      "import": "./dist/esm/highlight_alias.js",
+      "require": "./dist/cjs/highlight_alias.js",
+      "types": "./dist/esm/highlight_alias.ts"
+    },
     "./dist/highlight_alias.json": "./highlight_alias.json",
     "./dist/html_tag": {
       "import": "./dist/esm/html_tag.js",
@@ -183,8 +188,9 @@
   "scripts": {
     "build-cjs": "tsc -p tsconfig.cjs.json",
     "build-esm": "tsc -p tsconfig.esm.json",
+    "build-exports": "node scripts/build_exports.mjs",
     "build-hightlight": "node scripts/build_highlight_alias.mjs",
-    "build": "npm run build-cjs && npm run build-esm && npm run build-hightlight",
+    "build": "npm run build-cjs && npm run build-esm && npm run build-hightlight && npm run build-exports",
     "clean": "npx --yes rimraf dist tmp && npm run build",
     "prepublishOnly": "npm install && npm run clean && npm run build",
     "eslint": "eslint --config eslint.config.mjs lib test",
