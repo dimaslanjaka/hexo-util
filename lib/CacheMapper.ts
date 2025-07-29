@@ -1,5 +1,5 @@
 /** @internal */
-export class CacheMapper<K, V> implements Map<K, V> {
+export class CacheMapper<K, V> {
   private readonly _innerMap: Map<K, V>;
   readonly size: number;
 

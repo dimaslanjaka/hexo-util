@@ -1,5 +1,6 @@
 export { default as Cache } from './cache.js';
 export { default as CacheStream } from './cache_stream.js';
+export { CacheMapper, CacheType as CacheMapType, Cache as CacheWithMap } from './CacheMapper.js';
 export { default as camelCaseKeys } from './camel_case_keys.js';
 export { default as Color } from './color.js';
 export { default as decodeURL } from './decode_url.js';
@@ -10,7 +11,7 @@ export { default as escapeHTML } from './escape_html.js';
 export { default as escapeRegExp } from './escape_regexp.js';
 export { default as full_url_for } from './full_url_for.js';
 export { default as gravatar } from './gravatar.js';
-export { hash, createSha1Hash } from './hash.js';
+export { createSha1Hash, hash } from './hash.js';
 export { default as highlight } from './highlight.js';
 export { default as htmlTag } from './html_tag.js';
 export { default as isExternalLink } from './is_external_link.js';
@@ -28,3 +29,4 @@ export { default as truncate } from './truncate.js';
 export { default as unescapeHTML } from './unescape_html.js';
 export { default as url_for } from './url_for.js';
 export { default as wordWrap } from './word_wrap.js';
+
