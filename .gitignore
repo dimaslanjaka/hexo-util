@@ -10,3 +10,7 @@ dist/
 package-lock.json
 .vscode/
 *.patch
+*.ignore
+*.diff
+lib/highlight_alias.ts
+.last_build

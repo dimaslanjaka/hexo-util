@@ -1,7 +1,7 @@
 import * as htmlparser2 from 'htmlparser2';
 // eslint-disable-next-line node/no-extraneous-import
 import type { Element } from 'domhandler';
-import escapeHTML from './escape_html';
+import escapeHTML from './escape_html.js';
 const nonWord = /^\s*[^a-zA-Z0-9]\s*$/;
 
 const parseHtml = (html: string) => {
@@ -72,4 +72,12 @@ export function tocObj(str: string, options = {}) {
   return result;
 }
 
+
+// For ESM compatibility
 export default tocObj;
+// For CommonJS compatibility
+if (typeof module !== 'undefined' && typeof module.exports === 'object' && module.exports !== null) {
+  module.exports = tocObj;
+  // For ESM compatibility
+  module.exports.default = tocObj;
+}

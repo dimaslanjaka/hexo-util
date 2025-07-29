@@ -1,5 +1,5 @@
 import { parse } from 'url';
-import Cache from './cache';
+import Cache from './cache.js';
 const cache = new Cache<boolean>();
 
 /**
@@ -48,4 +48,12 @@ export function isExternalLink(input: string, sitehost: string, exclude?: string
   });
 }
 
+
+// For ESM compatibility
 export default isExternalLink;
+// For CommonJS compatibility
+if (typeof module !== 'undefined' && typeof module.exports === 'object' && module.exports !== null) {
+  module.exports = isExternalLink;
+  // For ESM compatibility
+  module.exports.default = isExternalLink;
+}

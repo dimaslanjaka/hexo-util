@@ -1,11 +1,12 @@
 import { parse } from 'url';
-import encodeURL from './encode_url';
-import prettyUrls from './pretty_urls';
-import Cache from './cache';
+import encodeURL from './encode_url.js';
+import prettyUrls from './pretty_urls.js';
+import Cache from './cache.js';
 const cache = new Cache<string>();
 
 export function fullUrlForHelper(path = '/') {
-  const { config } = this;
+  // Safe destructuring to avoid errors if `this` is undefined
+  const { config = {} } = this || {};
   const prettyUrlsOptions = Object.assign({
     trailing_index: true,
     trailing_html: true
@@ -28,4 +29,12 @@ export function fullUrlForHelper(path = '/') {
   });
 }
 
+
+// For ESM compatibility
 export default fullUrlForHelper;
+// For CommonJS compatibility
+if (typeof module !== 'undefined' && typeof module.exports === 'object' && module.exports !== null) {
+  module.exports = fullUrlForHelper;
+  // For ESM compatibility
+  module.exports.default = fullUrlForHelper;
+}
