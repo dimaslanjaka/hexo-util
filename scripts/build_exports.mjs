@@ -18,11 +18,13 @@ const defaultExports = {
 };
 
 fs.readdirSync(path.join(__dirname, '../lib')).forEach(file => {
-  defaultExports[`./dist/${file.replace('.ts', '')}`] = {
-    'import': `./dist/esm/${file.replace('.ts', '.js')}`,
-    'require': `./dist/cjs/${file.replace('.ts', '.js')}`,
-    'types': `./dist/esm/${file.replace('.js', '.d.ts')}`
-  };
+  if (!file.startsWith('_')) {
+    defaultExports[`./dist/${file.replace('.ts', '')}`] = {
+      'import': `./dist/esm/${file.replace('.ts', '.js')}`,
+      'require': `./dist/cjs/${file.replace('.ts', '.js')}`,
+      'types': `./dist/esm/${file.replace('.js', '.d.ts')}`
+    };
+  }
 });
 
 // Sort the exports to ensure consistent output
