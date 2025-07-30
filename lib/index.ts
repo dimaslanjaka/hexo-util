@@ -29,4 +29,5 @@ export { default as truncate } from './truncate.js';
 export { default as unescapeHTML } from './unescape_html.js';
 export { default as url_for } from './url_for.js';
 export { default as wordWrap } from './word_wrap.js';
+export { jsonStringify, jsonParse } from './json_stringify_circular.js';
 
