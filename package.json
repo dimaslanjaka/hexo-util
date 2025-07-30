@@ -168,6 +168,11 @@
       "require": "./dist/cjs/truncate.js",
       "types": "./dist/esm/truncate.ts"
     },
+    "./dist/types": {
+      "import": "./dist/esm/types.js",
+      "require": "./dist/cjs/types.js",
+      "types": "./dist/esm/types.ts"
+    },
     "./dist/unescape_html": {
       "import": "./dist/esm/unescape_html.js",
       "require": "./dist/cjs/unescape_html.js",

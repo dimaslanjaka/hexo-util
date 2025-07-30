@@ -18,7 +18,7 @@ const defaultExports = {
 };
 
 fs.readdirSync(path.join(__dirname, '../lib')).forEach(file => {
-  if (!file.startsWith('_')) {
+  if (!file.startsWith('_') && !file.includes('highlight_esm')) {
     defaultExports[`./dist/${file.replace('.ts', '')}`] = {
       'import': `./dist/esm/${file.replace('.ts', '.js')}`,
       'require': `./dist/cjs/${file.replace('.ts', '.js')}`,
