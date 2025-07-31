@@ -200,7 +200,7 @@
     "build-esm": "tsc -p tsconfig.esm.json",
     "build-exports": "node scripts/build_exports.mjs",
     "build-hightlight": "node scripts/build_highlight_alias.mjs",
-    "build": "npm run build-cjs && npm run build-esm && npm run build-hightlight && npm run build-exports",
+    "build": "npm run build-hightlight && node build.js && npm run build-exports",
     "clean": "npx --yes rimraf dist tmp",
     "prepublishOnly": "npm install && npm run clean && npm run build",
     "lint": "eslint --config eslint.config.mjs lib test",
@@ -248,6 +248,7 @@
     "domhandler": "^5.0.3",
     "eslint": "^9.32.0",
     "eslint-config-hexo": "^6.0.0",
+    "eslint-import-resolver-node": "^0.3.9",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import": "^2.32.0",
     "highlightjs-solidity": "^2.0.6",
@@ -256,7 +257,8 @@
     "mocha": "^11.7.1",
     "rewire": "^9.0.0",
     "ts-node": "^10.9.1",
-    "typescript": "^5.2.2"
+    "tsup": "^8.5.0",
+    "typescript": "^5.0.3"
   },
   "dependencies": {
     "change-case": "^5.4.4",
