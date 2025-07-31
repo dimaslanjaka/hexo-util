@@ -93,6 +93,11 @@
       "types": "./dist/esm/highlight_alias.ts"
     },
     "./dist/highlight_alias.json": "./highlight_alias.json",
+    "./dist/highlight_shared": {
+      "import": "./dist/esm/highlight_shared.js",
+      "require": "./dist/cjs/highlight_shared.js",
+      "types": "./dist/esm/highlight_shared.ts"
+    },
     "./dist/html_tag": {
       "import": "./dist/esm/html_tag.js",
       "require": "./dist/cjs/html_tag.js",
@@ -254,7 +259,7 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "camel-case": "^4.1.2",
+    "change-case": "^5.4.4",
     "cross-spawn": "^7.0.3",
     "highlight.js": "^11.6.0",
     "htmlparser2": "^10.0.0",

@@ -1,4 +1,6 @@
-import { camelCase } from 'camel-case';
+import * as changeCase from 'change-case';
+
+const { camelCase } = changeCase;
 
 function getter(key: string) {
   return function() {
@@ -7,7 +9,7 @@ function getter(key: string) {
 }
 
 function setter(key: string) {
-  return function(value) {
+  return function(value: unknown) {
     this[key] = value;
   };
 }
