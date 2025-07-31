@@ -1,0 +1,105 @@
+# To run tests for a specific Node.js version, use:
+#   docker compose up node12
+# To build without using the cache, run:
+#   docker compose build --no-cache node12
+# To rebuild all service images, use:
+#   docker compose build --no-cache
+# Then start the service:
+#   docker compose up node12
+# Replace 'node12' with the desired service (node12, node14, node16, node18, node20, node22, node24) as needed.
+#
+# To run tests for all Node.js versions in parallel, use:
+#   docker compose up
+
+services:
+  # Node.js 18 through 24 test runners
+  node18:
+    build:
+      context: .
+      target: node18
+    working_dir: /workspace
+    entrypoint: /workspace/docker.entrypoint.sh
+    volumes:
+      - ./docker.entrypoint.sh:/workspace/docker.entrypoint.sh
+      - ./eslint.config.mjs:/workspace/eslint.config.mjs
+      - ./package.json:/workspace/package.json
+      - ./scripts:/workspace/scripts
+      - ./src:/workspace/src
+      - ./test:/workspace/test
+      - ./tmp/docker-caches/node-18/dist:/workspace/dist
+      - ./tmp/docker-caches/node-18/tmp/logs:/workspace/tmp/logs
+      - ./tmp/project-test:/workspace/tmp/project-test
+      - ./tsconfig.base.json:/workspace/tsconfig.base.json
+      - ./tsconfig.cjs.json:/workspace/tsconfig.cjs.json
+      - ./tsconfig.esm.json:/workspace/tsconfig.esm.json
+      - ./tsconfig.mocha.json:/workspace/tsconfig.mocha.json
+      - ./tsconfig.json:/workspace/tsconfig.json
+
+  node20:
+    build:
+      context: .
+      target: node20
+    working_dir: /workspace
+    entrypoint: /workspace/docker.entrypoint.sh
+    volumes:
+      - ./docker.entrypoint.sh:/workspace/docker.entrypoint.sh
+      - ./eslint.config.mjs:/workspace/eslint.config.mjs
+      - ./package.json:/workspace/package.json
+      - ./scripts:/workspace/scripts
+      - ./src:/workspace/src
+      - ./test:/workspace/test
+      - ./tmp/docker-caches/node-20/dist:/workspace/dist
+      - ./tmp/docker-caches/node-20/tmp/logs:/workspace/tmp/logs
+      - ./tmp/docker-caches/node-20/tmp/jest:/workspace/tmp/jest
+      - ./tmp/project-test:/workspace/tmp/project-test
+      - ./tsconfig.base.json:/workspace/tsconfig.base.json
+      - ./tsconfig.cjs.json:/workspace/tsconfig.cjs.json
+      - ./tsconfig.esm.json:/workspace/tsconfig.esm.json
+      - ./tsconfig.mocha.json:/workspace/tsconfig.mocha.json
+      - ./tsconfig.json:/workspace/tsconfig.json
+
+  node22:
+    build:
+      context: .
+      target: node22
+    working_dir: /workspace
+    entrypoint: /workspace/docker.entrypoint.sh
+    volumes:
+      - ./docker.entrypoint.sh:/workspace/docker.entrypoint.sh
+      - ./eslint.config.mjs:/workspace/eslint.config.mjs
+      - ./package.json:/workspace/package.json
+      - ./scripts:/workspace/scripts
+      - ./src:/workspace/src
+      - ./test:/workspace/test
+      - ./tmp/docker-caches/node-22/dist:/workspace/dist
+      - ./tmp/docker-caches/node-22/tmp/logs:/workspace/tmp/logs
+      - ./tmp/docker-caches/node-22/tmp/jest:/workspace/tmp/jest
+      - ./tmp/project-test:/workspace/tmp/project-test
+      - ./tsconfig.base.json:/workspace/tsconfig.base.json
+      - ./tsconfig.cjs.json:/workspace/tsconfig.cjs.json
+      - ./tsconfig.esm.json:/workspace/tsconfig.esm.json
+      - ./tsconfig.mocha.json:/workspace/tsconfig.mocha.json
+      - ./tsconfig.json:/workspace/tsconfig.json
+
+  node24:
+    build:
+      context: .
+      target: node24
+    working_dir: /workspace
+    entrypoint: /workspace/docker.entrypoint.sh
+    volumes:
+      - ./docker.entrypoint.sh:/workspace/docker.entrypoint.sh
+      - ./eslint.config.mjs:/workspace/eslint.config.mjs
+      - ./package.json:/workspace/package.json
+      - ./scripts:/workspace/scripts
+      - ./src:/workspace/src
+      - ./test:/workspace/test
+      - ./tmp/docker-caches/node-24/dist:/workspace/dist
+      - ./tmp/docker-caches/node-24/tmp/logs:/workspace/tmp/logs
+      - ./tmp/docker-caches/node-24/tmp/jest:/workspace/tmp/jest
+      - ./tmp/project-test:/workspace/tmp/project-test
+      - ./tsconfig.base.json:/workspace/tsconfig.base.json
+      - ./tsconfig.cjs.json:/workspace/tsconfig.cjs.json
+      - ./tsconfig.esm.json:/workspace/tsconfig.esm.json
+      - ./tsconfig.mocha.json:/workspace/tsconfig.mocha.json
+      - ./tsconfig.json:/workspace/tsconfig.json
