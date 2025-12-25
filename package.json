@@ -37,6 +37,11 @@
       "require": "./dist/cjs/color.js",
       "types": "./dist/esm/color.ts"
     },
+    "./dist/cross_dirname": {
+      "import": "./dist/esm/cross_dirname.js",
+      "require": "./dist/cjs/cross_dirname.js",
+      "types": "./dist/esm/cross_dirname.ts"
+    },
     "./dist/decode_url": {
       "import": "./dist/esm/decode_url.js",
       "require": "./dist/cjs/decode_url.js",
