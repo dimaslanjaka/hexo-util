@@ -259,6 +259,7 @@
     "mocha": "^11.7.5",
     "rewire": "^9.0.1",
     "ts-node": "^10.9.1",
+    "tsup": "^8.5.1",
     "typescript": "^5.9.3"
   },
   "dependencies": {
