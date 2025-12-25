@@ -2,47 +2,23 @@ import chai from 'chai';
 import escapeHTML from '../lib/escape_html.js';
 import prismHighlight from '../lib/prism.js';
 import stripIndent from 'strip-indent';
+import validator from 'html-tag-validator';
 
 chai.should();
-
-/**
- * Validates the given HTML string using html-tag-validator, allowing 'aria-hidden' on <span> tags.
- * Uses dynamic import for ESM compatibility and returns a Promise that resolves if valid, rejects on error.
- *
- * @param str - The HTML string to validate.
- * @returns A Promise that resolves if the HTML is valid, or rejects with an error.
- */
-async function validateHtmlAsync(str: string): Promise<void> {
-  // Use dynamic import for html-tag-validator to avoid type issues in ESM/TS
-  const htmlTagValidatorModule = await import('html-tag-validator');
-  let htmlTagValidator;
-  if (typeof htmlTagValidatorModule === 'function') {
-    htmlTagValidator = htmlTagValidatorModule;
-  } else if (typeof htmlTagValidatorModule.default === 'function') {
-    htmlTagValidator = htmlTagValidatorModule.default;
-  } else {
-    htmlTagValidator = undefined;
-  }
-  if (!htmlTagValidator) throw new Error('html-tag-validator is not a function');
-  return await new Promise<void>((resolve, reject) => {
-    htmlTagValidator(
-      str,
-      {
-        attributes: {
-          // 'aria-hidden' is used at <span> for line number
-          // Even MDN website itself uses 'aria-hidden' at <span> tag
-          // So I believe it is ok to whitelist this
-          span: { normal: ['aria-hidden'] }
-        }
-      },
-      (err, ast) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(undefined);
-        }
-      }
-    );
+function validateHtmlAsync(str: string, done?: (err?: any) => void) {
+  validator(str, {
+    'attributes': {
+      // 'aria-hidden' is used at <span> for line number
+      // Even MDN website itself uses 'aria-hidden' at <span> tag
+      // So I believe it is ok to whitelist this
+      'span': { 'normal': ['aria-hidden'] }
+    }
+  }, (err: any) => {
+    if (err) {
+      done?.(err);
+    } else {
+      done?.();
+    }
   });
 }
 

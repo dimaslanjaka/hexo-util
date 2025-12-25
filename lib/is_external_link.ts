@@ -22,7 +22,7 @@ export function isExternalLink(input: string, sitehost: string, exclude?: string
     if (!sitehost) return false;
 
     // handle relative url and invalid url
-    let data;
+    let data: URL;
     try {
       data = new URL(input, `http://${sitehost}`);
     } catch {

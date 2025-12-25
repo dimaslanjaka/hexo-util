@@ -1,6 +1,6 @@
 {
   "name": "hexo-util",
-  "version": "3.3.0",
+  "version": "4.0.0",
   "description": "Utilities for Hexo.",
   "type": "module",
   "main": "dist/cjs/index.js",
@@ -251,19 +251,15 @@
     "c8": "^10.1.2",
     "chai": "^4.3.6",
     "domhandler": "^5.0.3",
-    "eslint": "^9.32.0",
+    "eslint": "^9.39.1",
     "eslint-config-hexo": "^6.0.0",
-    "eslint-import-resolver-node": "^0.3.9",
-    "eslint-import-resolver-typescript": "^4.4.4",
-    "eslint-plugin-import": "^2.32.0",
     "highlightjs-solidity": "^2.0.6",
     "html-entities": "^2.3.3",
     "html-tag-validator": "^1.6.0",
-    "mocha": "^11.7.1",
-    "rewire": "^9.0.0",
+    "mocha": "^11.7.5",
+    "rewire": "^9.0.1",
     "ts-node": "^10.9.1",
-    "tsup": "^8.5.0",
-    "typescript": "^5.0.3"
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "change-case": "^5.4.4",

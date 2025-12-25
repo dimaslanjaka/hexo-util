@@ -63,7 +63,7 @@ describe('spawn', () => {
       await spawn(catCommand, ['nothing']);
       // should not reach here
       true.should.eql(false);
-    } catch (e) {
+    } catch (e: any) {
       if (isWindows) {
         e.message.should.eql('spawn type ENOENT');
         e.should.have.property('code', 'ENOENT');
@@ -137,8 +137,7 @@ describe('spawn', () => {
   });
 
   it('encoding = null', async () => {
-    // @ts-ignore
-    const out = await spawn(catCommand, [fixturePath], {encoding: null}) as Buffer;
+    const out = await spawn(catCommand, [fixturePath], {encoding: null as any}) as Buffer;
     out.should.eql(Buffer.from(fixture));
   });
 
@@ -153,7 +152,7 @@ describe('spawn', () => {
       }
       // should not reach here
       true.should.eql(false);
-    } catch (error) {
+    } catch (error: any) {
       error.message.should.equal('Spawn failed');
     }
   });
