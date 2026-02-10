@@ -15,6 +15,8 @@ export const decodeURL = (str: string) => {
   // Try absolute URL
   try {
     const url = new URL(str);
+    // Exit if input is a data url
+    if (url.origin === 'null') return str;
     // Convert punycode host to Unicode if needed
     const unicodeHost = punycode.toUnicode(url.hostname);
     // Decode pathname only if not already decoded
