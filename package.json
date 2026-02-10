@@ -248,6 +248,7 @@
     "@types/prismjs": "^1.26.0",
     "@types/rewire": "^2.5.30",
     "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.55.0",
     "c8": "^10.1.2",
     "chai": "^4.3.6",
     "domhandler": "^5.0.3",
