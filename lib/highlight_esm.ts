@@ -1,8 +1,4 @@
-import { createRequire } from 'module';
 import { default as highlightUtil } from './highlight_shared.js';
-
-// For ESM environments
-global._require = createRequire(import.meta.url);
 
 // ESM compatibility
 export default highlightUtil;
