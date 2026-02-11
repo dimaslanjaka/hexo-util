@@ -213,7 +213,8 @@
     "pretest": "node scripts/pretest.mjs",
     "test": "mocha --loader=ts-node/esm --project tsconfig.mocha.json",
     "test-cov": "c8 --reporter=lcovonly npm run test",
-    "postinstall": "npm run build-hightlight"
+    "postinstall": "npm run build-hightlight",
+    "watch": "npx -y nodemon --delay 3 --ignore lib/highlight_alias.ts --watch build.js --watch lib --ext js,ts --exec \"yarn build > build.log 2>&1 && yarn workspace hexo-site run build\""
   },
   "files": [
     "dist/**",
