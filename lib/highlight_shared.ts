@@ -30,17 +30,6 @@ function highlightUtil(str: string, options: InternalHighlightOptions = {}) {
   }
   hljs.configure({ classPrefix: useHljs ? 'hljs-' : '' });
   let lang = options.lang || options.language || 'plaintext';
-  // Register the language if it hasn't been registered yet
-  if (!hljs.getLanguage(lang)) {
-    try {
-      const mod = global._require(
-        `highlight.js/lib/languages/${alias.aliases[lang] || lang}`
-      );
-      hljs.registerLanguage(lang, mod.default || mod);
-    } catch {
-      // If the language module does not exist, skip registration
-    }
-  }
 
   const data = highlight(str, options);
   lang = options.lang || data.language || '';
@@ -108,7 +97,7 @@ function formatLine(line: string, lineno: number, marked: number[], options: Int
 }
 
 function replaceTabs(str: string, tab: string) {
-  return str.replace(/\t+/, match => tab.repeat(match.length));
+  return str.replace(/\t+/, (match) => tab.repeat(match.length));
 }
 
 function highlight(str: string, options: InternalHighlightOptions) {
@@ -130,6 +119,16 @@ function highlight(str: string, options: InternalHighlightOptions) {
     lang = 'plaintext';
   }
 
+  // Ensure the language is registered (e.g. 'plaintext') before highlighting
+  if (!hljs.getLanguage(lang)) {
+    try {
+      const mod = require(`highlight.js/lib/languages/${alias.aliases[lang] || lang}`);
+      hljs.registerLanguage(lang, mod.default || mod);
+    } catch {
+      // If registration fails, let highlight.js throw the appropriate error
+    }
+  }
+
   const res = hljs.highlight(str, {
     language: lang,
     ignoreIllegals: true
@@ -144,8 +143,8 @@ function closeTags(res: HighlightResult) {
 
   res.value = res.value
     .split('\n')
-    .map(line => {
-      const prepend = tokenStack.map(token => `<span class="${token}">`).join('');
+    .map((line) => {
+      const prepend = tokenStack.map((token) => `<span class="${token}">`).join('');
       const matches = line.matchAll(/(<span class="(.*?)">|<\/span>)/g);
       for (const match of matches) {
         if (match[0] === '</span>') tokenStack.shift();
