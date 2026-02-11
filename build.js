@@ -12,7 +12,7 @@ const debugLogPath = path.join(__dirname, 'build-debug.log');
 
 // Clear previous debug log
 if (fs.existsSync(debugLogPath)) {
-  fs.unlinkSync(debugLogPath);
+  fs.writeFileSync(debugLogPath, `Build started at ${new Date().toISOString()}\n\n`);
 }
 
 // Simple logger that logs to console and appends to debug log file
@@ -119,7 +119,6 @@ function buildTsup() {
                 // Here we would normally check if it's a directory or file
                 // For simplicity, let's assume it's always a file for this example
                 const isDir = fs.existsSync(fullImportPath) && fs.lstatSync(fullImportPath).isDirectory();
-                const indexCandidates = ['index.js', 'index.mjs', 'index.cjs', 'index.ts', 'index.tsx'];
                 log(`Processing import in ${filename} (${p2} from ${dirFile}): ${match} (isDir: ${isDir})`);
                 if (isDir) {
                   // directory import -> point to index file
@@ -131,18 +130,39 @@ function buildTsup() {
             }
           );
           if (this.format === 'cjs') {
+            // Exclude specific paths from modification
+            const skipPaths = ['prismjs/components/index'];
+
             // replace `from '...js'` with `from '...cjs'` for cjs imports & exports
-            code = code.replace(/from ['"](.*)\.js['"]/g, "from '$1.cjs'");
-            // replace `require('...js')` with `require('...cjs')`
-            code = code.replace(/require\(['"](.*)\.js['"]\)/g, "require('$1.cjs')");
+            code = code.replace(/from ['"](.*)\.js['"]/g, (m, p1) =>
+              skipPaths.includes(p1) ? m : m.replace('.js', '.cjs')
+            );
+
+            // replace `require('...js')` with `require('...cjs')` (preserve original quoting/spacing)
+            code = code.replace(/require\(['"](.*)\.js['"]\)/g, (m, p1) =>
+              skipPaths.includes(p1) ? m : m.replace('.js', '.cjs')
+            );
+
             // replace `require('...js')` with `require('...cjs')` from esbuild-fix-imports-plugin
-            code = code.replace(/require\(\s?['"](.*)\.js['"]\s?\)/g, "require('$1.cjs')");
+            code = code.replace(/require\(\s?['"](.*)\.js['"]\s?\)/g, (m, p1) =>
+              skipPaths.includes(p1) ? m : m.replace('.js', '.cjs')
+            );
+
             // replace dynamic require calls 'require(`...js`)' with 'require(`...cjs`)'
-            code = code.replace(/require\(\s?`(.*)\.js`\s?\)/g, 'require(`$1.cjs`)');
+            code = code.replace(/require\(\s?`(.*)\.js`\s?\)/g, (m, p1) =>
+              skipPaths.includes(p1) ? m : m.replace('.js', '.cjs')
+            );
+
             // replace `loadRequire('...js')` with `loadRequire('...cjs')`
-            code = code.replace(/loadRequire\(['"](.*)\.js['"]\)/g, "loadRequire('$1.cjs')");
+            code = code.replace(/loadRequire\(['"](.*)\.js['"]\)/g, (m, p1) =>
+              skipPaths.includes(p1) ? m : m.replace('.js', '.cjs')
+            );
+
             // replace dynamic loadRequire calls 'loadRequire(`...js`)' with 'loadRequire(`...cjs`)'
-            code = code.replace(/loadRequire\(\s?`(.*)\.js`\s?\)/g, 'loadRequire(`$1.cjs`)');
+            code = code.replace(/loadRequire\(\s?`(.*)\.js`\s?\)/g, (m, p1) =>
+              skipPaths.includes(p1) ? m : m.replace('.js', '.cjs')
+            );
+
             return { code };
           } else {
             // for esm, just return the modified code
