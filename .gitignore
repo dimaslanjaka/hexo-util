@@ -14,4 +14,16 @@ package-lock.json
 *.diff
 lib/highlight_alias.ts
 .last_build
+.env
+# Yarn (Berry) - ignore runtime/build files
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/patches
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
 yarn.lock
