@@ -1,7 +1,7 @@
-import encodeURL from './encode_url.js';
-import relative_url from './relative_url.js';
-import prettyUrls from './pretty_urls.js';
 import Cache from './cache.js';
+import encodeURL from './encode_url.js';
+import prettyUrls from './pretty_urls.js';
+import relative_url from './relative_url.js';
 const cache = new Cache<string>();
 
 /**
@@ -24,7 +24,7 @@ interface UrlForOptions {
  * const Hutil = require('hexo-util')
  * console.log(Hutil.url_for.bind(hexo)('path/to/file/inside/source.css')); // https://example.com/path/to/file/inside/source.css
  */
-function urlForHelper(path = '/', options: UrlForOptions | null = {}) {
+function urlForHelper(this: { config?: any, path?: string }, path = '/', options: UrlForOptions | null = {}) {
   if (/^(#|\/\/|http(s)?:)/.test(path)) return path;
 
   // Safe destructuring to avoid errors if `this` is undefined
