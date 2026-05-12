@@ -1,7 +1,7 @@
 /** @internal */
 export class CacheMapper<K, V> {
   private readonly _innerMap: Map<K, V>;
-  readonly size: number;
+  readonly size: number | undefined;
 
   constructor() {
     this._innerMap = new Map();
@@ -28,7 +28,7 @@ export class CacheMapper<K, V> {
   [Symbol.iterator](): IterableIterator<[K, V]> {
     return this._innerMap.entries();
   }
-  [Symbol.toStringTag]: string;
+  [Symbol.toStringTag]!: string;
 
   typeof() {
     return typeof this._innerMap;
