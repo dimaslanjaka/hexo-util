@@ -159,7 +159,7 @@ const adapt = function(delta: number, numPoints: number, firstTime: boolean): nu
  */
 const decode = function(input: string): string {
   // Don't use UCS-2.
-  const output = [];
+  const output: number[] = [];
   const inputLength = input.length;
   let i = 0;
   let n = initialN;
@@ -252,7 +252,7 @@ const decode = function(input: string): string {
  * Punycode string of ASCII-only symbols.
  */
 const encode = function(input: string): string {
-  const output = [];
+  const output: string[] = [];
 
   // Convert the input in UCS-2 to an array of Unicode code points.
   const inputArr = ucs2decode(input);
