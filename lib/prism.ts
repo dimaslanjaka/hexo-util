@@ -120,8 +120,8 @@ function PrismUtil(str: string, options: Options = {}) {
     }
   }
 
-  const preTagClassArr = [];
-  const preTagAttrArr = [];
+  const preTagClassArr: string[] = [];
+  const preTagAttrArr: string[] = [];
   let preTagAttr = '';
 
   if (lineNumber) preTagClassArr.push('line-numbers');
