@@ -97,7 +97,7 @@ function formatLine(line: string, lineno: number, marked: number[], options: Int
 }
 
 function replaceTabs(str: string, tab: string) {
-  return str.replace(/\t+/, (match) => tab.repeat(match.length));
+  return str.replace(/\t+/, match => tab.repeat(match.length));
 }
 
 function highlight(str: string, options: InternalHighlightOptions) {
@@ -115,14 +115,16 @@ function highlight(str: string, options: InternalHighlightOptions) {
     return closeTags(result);
   }
 
-  if (!lang || (!alias.aliases[lang] && !hljs.getLanguage(lang))) {
+  const aliasesLang = (alias.aliases as Record<string, string>)[lang || ''];
+
+  if (!lang || (!aliasesLang && !hljs.getLanguage(lang))) {
     lang = 'plaintext';
   }
 
   // Ensure the language is registered (e.g. 'plaintext') before highlighting
   if (!hljs.getLanguage(lang)) {
     try {
-      const mod = require(`highlight.js/lib/languages/${alias.aliases[lang] || lang}`);
+      const mod = require(`highlight.js/lib/languages/${aliasesLang || lang}`);
       hljs.registerLanguage(lang, mod.default || mod);
     } catch {
       // If registration fails, let highlight.js throw the appropriate error
@@ -139,12 +141,12 @@ function highlight(str: string, options: InternalHighlightOptions) {
 
 // https://github.com/hexojs/hexo-util/issues/10
 function closeTags(res: HighlightResult) {
-  const tokenStack = [];
+  const tokenStack: string[] = [];
 
   res.value = res.value
     .split('\n')
-    .map((line) => {
-      const prepend = tokenStack.map((token) => `<span class="${token}">`).join('');
+    .map(line => {
+      const prepend = tokenStack.map(token => `<span class="${token}">`).join('');
       const matches = line.matchAll(/(<span class="(.*?)">|<\/span>)/g);
       for (const match of matches) {
         if (match[0] === '</span>') tokenStack.shift();

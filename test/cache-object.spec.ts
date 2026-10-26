@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { Cache } from '../lib/index.js';
 import { describe, it } from 'mocha';
 import { expect, should } from 'chai';

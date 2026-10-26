@@ -1,5 +1,3 @@
-'use strict';
-
 import { describe } from 'mocha';
 
 // to run single test
