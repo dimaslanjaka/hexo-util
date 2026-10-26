@@ -1,3 +1,2 @@
 reporter: spec
-spec: "./test/**/*.spec.ts"
 extension: ['ts']
