@@ -1,25 +1,37 @@
+
 import chai from 'chai';
 import escapeHTML from '../lib/escape_html.js';
 import prismHighlight from '../lib/prism.js';
 import stripIndent from 'strip-indent';
-import validator from 'html-tag-validator';
+import { HtmlValidate } from 'html-validate';
 
 chai.should();
-function validateHtmlAsync(str: string, done?: (err?: any) => void) {
-  validator(str, {
-    'attributes': {
-      // 'aria-hidden' is used at <span> for line number
-      // Even MDN website itself uses 'aria-hidden' at <span> tag
-      // So I believe it is ok to whitelist this
-      'span': { 'normal': ['aria-hidden'] }
-    }
-  }, (err: any) => {
-    if (err) {
-      done?.(err);
-    } else {
-      done?.();
-    }
-  });
+
+const htmlValidator = new HtmlValidate({
+  extends: ['html-validate:recommended'],
+  rules: {
+    // 'aria-hidden' is used at <span> for line number
+    // Even MDN website itself uses 'aria-hidden' at <span> tag
+    // So I believe it is ok to whitelist this
+    'element-permitted-content': 'off'
+  }
+});
+
+async function validateHtmlAsync(str: string): Promise<void> {
+  const report = await htmlValidator.validateString(str);
+
+  if (report.valid) {
+    return;
+  }
+
+  const messages = report.results.flatMap(result =>
+    result.messages.map(
+      message =>
+        `${message.line}:${message.column} ${message.ruleId}: ${message.message}`
+    )
+  );
+
+  throw new Error(`HTML validation failed:\n${messages.join('\n')}`);
 }
 
 const endTag = '</code></pre>';

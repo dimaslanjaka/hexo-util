@@ -1,8 +1,9 @@
 import chai from 'chai';
-import hljs, { HighlightResult } from 'highlight.js';
+import hljs from 'highlight.js';
+import type { HighlightResult } from 'highlight.js';
 import { solidity } from 'highlightjs-solidity';
 import { encode } from 'html-entities';
-import validator from 'html-tag-validator';
+import { HtmlValidate } from 'html-validate';
 import type HighlightJSFunc from '../lib/highlight_esm.js';
 
 chai.should();
@@ -61,13 +62,32 @@ function assertResult(result: string, ...args: string[]) {
   result.should.eql(start + args.join('') + end);
 }
 
-function validateHtmlAsync(str: string, done: (...args: any[]) => void) {
-  validator(str, (err: any, _ast: any) => {
-    if (err) {
-      done(err);
-    } else {
+const htmlValidator = new HtmlValidate({
+  extends: ['html-validate:recommended'],
+  rules: {
+    // Preserve the existing generated table markup.
+    'prefer-tbody': 'off',
+    // Preserve the existing caption markup inside <pre>.
+    'element-permitted-content': 'off'
+  }
+});
+
+function validateHtmlAsync(str: string, done: (err?: Error) => void) {
+  void htmlValidator.validateString(str).then(report => {
+    if (report.valid) {
       done();
+      return;
     }
+
+    const messages = report.results.flatMap(result =>
+      result.messages.map(
+        message => `${message.line}:${message.column} ${message.ruleId}: ${message.message}`,
+      ),
+    );
+
+    done(new Error(`HTML validation failed:\n${messages.join('\n')}`));
+  }).catch((error: unknown) => {
+    done(error instanceof Error ? error : new Error(String(error)));
   });
 }
 
@@ -97,7 +117,9 @@ describe('highlight', () => {
    */
   function runHighlightTests(type: 'esm' | 'cjs' | 'ts') {
     describe(`${type.toUpperCase()} module`, () => {
-      before(async () => {
+      before(async function () {
+        // The first ESM import may take longer when running through ts-node on Windows.
+        this.timeout(10000);
         highlight = await loadHighlight(type);
       });
 
