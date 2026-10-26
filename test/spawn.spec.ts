@@ -115,13 +115,13 @@ describe('spawn', () => {
 
     return _spawn(catCommand, ['nothing'], {
       verbose: true
-    }).then(() => {
+    }).then((): void => {
       // should not reach here
       true.should.eql(false);
-    }, e => {
+    }, (e: Error): Error => {
       return e;
-    }).then(() => {
-      const stderrResult = stderrCache.getCache();
+    }).then((): void => {
+      const stderrResult: Buffer = stderrCache.getCache();
       if (isWindows) {
         // utf8 support in windows shell (cmd.exe) is difficult.
         Buffer.byteLength(stderrResult, 'hex').should.least(1);
