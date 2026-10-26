@@ -10,7 +10,9 @@ chai.should();
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const isWindows = process.platform === 'win32';
-const catCommand = isWindows ? 'type' : 'cat';
+// On Windows, run `type` through cmd.exe so a `type` script on PATH (e.g. Cygwin) is not picked up
+const catCommand = isWindows ? 'cmd.exe' : 'cat';
+const catArgs = (args: string[]): string[] => isWindows ? ['/c', 'type', ...args] : args;
 
 describe('spawn', () => {
   const fixturePath = join(__dirname, 'spawn_test.txt');
@@ -25,12 +27,13 @@ describe('spawn', () => {
   });
 
   it('default', async () => {
-    const out = await spawn(catCommand, [fixturePath]) as string;
+    const out = await spawn(catCommand, catArgs([fixturePath])) as string;
     out.should.eql(fixture);
   });
 
   it('default - string', async () => {
-    const out = await spawn(catCommand, fixturePath) as string;
+    // POSIX keeps the plain string argument; Windows needs an array because of '/c' and 'type'
+    const out = await spawn(catCommand, isWindows ? catArgs([fixturePath]) : fixturePath) as string;
     out.should.eql(fixture);
   });
 
@@ -60,13 +63,13 @@ describe('spawn', () => {
 
   it('error', async () => {
     try {
-      await spawn(catCommand, ['nothing']);
+      await spawn(catCommand, catArgs(['nothing']));
       // should not reach here
       true.should.eql(false);
     } catch (e: any) {
       if (isWindows) {
-        e.message.should.eql('spawn type ENOENT');
-        e.should.have.property('code', 'ENOENT');
+        // `cmd.exe /c type <missing file>` exits with code 1; the message depends on the Windows language
+        e.should.have.property('code', 1);
       } else {
         e.message.should.with.match(/^cat: nothing: No such file or directory\n?$/);
         e.should.have.property('code', 1);
@@ -113,7 +116,7 @@ describe('spawn', () => {
       on: () => {}
     }));
 
-    return _spawn(catCommand, ['nothing'], {
+    return _spawn(catCommand, catArgs(['nothing']), {
       verbose: true
     }).then((): void => {
       // should not reach here
@@ -132,12 +135,12 @@ describe('spawn', () => {
   });
 
   it('custom encoding', async () => {
-    const out = await spawn(catCommand, [fixturePath], {encoding: 'hex'}) as Buffer;
+    const out = await spawn(catCommand, catArgs([fixturePath]), {encoding: 'hex'}) as Buffer;
     out.should.eql(Buffer.from(fixture).toString('hex'));
   });
 
   it('encoding = null', async () => {
-    const out = await spawn(catCommand, [fixturePath], {encoding: null as any}) as Buffer;
+    const out = await spawn(catCommand, catArgs([fixturePath]), {encoding: null as any}) as Buffer;
     out.should.eql(Buffer.from(fixture));
   });
 
