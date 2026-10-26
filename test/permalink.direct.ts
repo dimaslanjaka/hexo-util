@@ -1,4 +1,4 @@
-import Permalink from '../lib/permalink';
+import Permalink from '../lib/permalink.js';
 
 let permalink: Permalink;
 

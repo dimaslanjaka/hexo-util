@@ -81,8 +81,8 @@ function validateHtmlAsync(str: string, done: (err?: Error) => void) {
 
     const messages = report.results.flatMap(result =>
       result.messages.map(
-        message => `${message.line}:${message.column} ${message.ruleId}: ${message.message}`,
-      ),
+        message => `${message.line}:${message.column} ${message.ruleId}: ${message.message}`
+      )
     );
 
     done(new Error(`HTML validation failed:\n${messages.join('\n')}`));
@@ -117,7 +117,7 @@ describe('highlight', () => {
    */
   function runHighlightTests(type: 'esm' | 'cjs' | 'ts') {
     describe(`${type.toUpperCase()} module`, () => {
-      before(async function () {
+      before(async function() {
         // The first ESM import may take longer when running through ts-node on Windows.
         this.timeout(10000);
         highlight = await loadHighlight(type);

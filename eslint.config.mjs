@@ -40,6 +40,9 @@ export default [
       'node/no-extraneous-import': 'off',
       'import/no-named-as-default': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
+      'no-duplicate-imports': 'off',
+      'import/no-named-as-default-member': 'off',
+      'no-void': 'off',
       'import/extensions': [
         'error',
         'never',
