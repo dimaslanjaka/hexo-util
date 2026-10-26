@@ -10,10 +10,21 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
+      - name: 💾 Cache Yarn dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            tmp
+            yarn.lock
+            node_modules
+            dist
+          key: ${{ runner.os }}-yarn-cache
+          restore-keys: ${{ runner.os }}-yarn-cache
       - name: Install Dependencies
-        run: npm install
+        shell: bash
+        run: touch yarn.lock && yarn install
       - name: Build Project
-        run: npm run build
+        run: yarn run build
       - name: Lint
         run: |
-          npm run lint
+          yarn run lint

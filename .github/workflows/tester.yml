@@ -16,10 +16,21 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+      - name: 💾 Cache Yarn dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            tmp
+            yarn.lock
+            node_modules
+            dist
+          key: ${{ runner.os }}-yarn-cache
+          restore-keys: ${{ runner.os }}-yarn-cache
       - name: Install Dependencies
-        run: npm install
+        shell: bash
+        run: touch yarn.lock && yarn install
       - name: Test
-        run: npm run test
+        run: yarn run test
         env:
           CI: true
   coverage:
@@ -34,10 +45,21 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+      - name: 💾 Cache Yarn dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            tmp
+            yarn.lock
+            node_modules
+            dist
+          key: ${{ runner.os }}-yarn-cache
+          restore-keys: ${{ runner.os }}-yarn-cache
       - name: Install Dependencies
-        run: npm install
+        shell: bash
+        run: touch yarn.lock && yarn install
       - name: Coverage
-        run: npm run test-cov
+        run: yarn run test-cov
       - name: Coveralls
         uses: coverallsapp/github-action@v2
         with:
