@@ -71,7 +71,7 @@ function urlForHelper(this: { config?: any, path?: string }, path = '/', options
       }
 
       // Exit if input is an external link or a data url
-      if (data.hostname !== sitehost || data.origin === 'null') {
+      if (!data || data.hostname !== sitehost || data.origin === 'null') {
         return path;
       }
 

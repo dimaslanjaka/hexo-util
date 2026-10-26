@@ -3,9 +3,11 @@ import prettyUrls from './pretty_urls.js';
 import Cache from './cache.js';
 const cache = new Cache<string>();
 
-export function fullUrlForHelper(path = '/') {
+export function fullUrlForHelper(this: any, path = '/') {
   // Safe destructuring to avoid errors if `this` is undefined
-  const { config = {} } = this || {};
+  const { config = {} } = (this || {}) as {
+    config?: Record<string, any>;
+  };
   const prettyUrlsOptions = Object.assign({
     trailing_index: true,
     trailing_html: true
@@ -22,10 +24,11 @@ export function fullUrlForHelper(path = '/') {
     } catch {
       sitehost = config.url;
     }
-    const data = new URL(path, `http://${sitehost}`);
+    // const sitehost = URL.parse(config.url)?.hostname || config.url;
+    const data = URL.parse(path, `http://${sitehost}`);
 
     // Exit if input is an external link or a data url
-    if (data.hostname !== sitehost || data.origin === 'null') return path;
+    if (!data || data.hostname !== sitehost || data.origin === 'null') return path;
 
     path = encodeURL(config.url + `/${path}`.replace(/\/{2,}/g, '/'));
     path = prettyUrls(path, prettyUrlsOptions);

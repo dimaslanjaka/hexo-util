@@ -22,15 +22,15 @@ export function isExternalLink(input: string, sitehost: string, exclude?: string
     if (!sitehost) return false;
 
     // handle relative url and invalid url
-    let data: URL;
+    let data: URL | undefined;
     try {
       data = new URL(input, `http://${sitehost}`);
     } catch {
       // ignore error, data will remain undefined
     }
 
-    // if input is invalid url, data should be undefined
-    if (typeof data !== 'object') return false;
+    // if input is invalid url, data should be null
+    if (!data) return false;
 
     // handle mailto: javascript: vbscript: and so on
     if (data.origin === 'null') return false;
