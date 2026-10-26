@@ -73,14 +73,14 @@ try {
   post.path;
   console.log('post.path should have thrown');
 } catch (err) {
-  console.log(err.message === 'Invalid permalink setting!');
+  console.log((err as any).message === 'Invalid permalink setting!');
 }
 
 try {
   post.permalink;
   console.log('post.permalink should have thrown');
 } catch (err) {
-  console.log(err.message === 'Invalid permalink setting!');
+  console.log((err as any).message === 'Invalid permalink setting!');
 }
 
 console.log('--- custom rule - :title.html ---');

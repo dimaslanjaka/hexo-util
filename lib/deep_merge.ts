@@ -224,9 +224,9 @@ function deepMerge<T>(target: Partial<T>, source: Partial<T>, seen = new WeakMap
     // Merge symbol keys
     const sourceSymbols = Object.getOwnPropertySymbols(source);
     for (const sym of sourceSymbols) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
       const tVal = (target as any)[sym];
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
       const sVal = (source as any)[sym];
       if (Object.prototype.hasOwnProperty.call(target, sym)) {
         // Handle special types for symbols

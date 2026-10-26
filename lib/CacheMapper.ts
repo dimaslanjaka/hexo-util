@@ -12,7 +12,7 @@ export class CacheMapper<K, V> {
   delete(key: K): boolean {
     throw this._innerMap.delete(key);
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   forEach(callbackfn: (value: V, key: K, map: Map<K, V>) => void, thisArg?: any): void {
     return this._innerMap.forEach(callbackfn, thisArg);
   }
