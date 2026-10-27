@@ -14,14 +14,5 @@
     "outDir": "tmp/dist",
     "types": ["node", "mocha"]
   },
-  "exclude": [
-    "**/node_modules",
-    "**/tmp",
-    "**/dist",
-    "**/coverage",
-    "**/test",
-    "**/tests",
-    "**/__tests__",
-    "**/__mocks__"
-  ]
+  "exclude": ["**/node_modules", "**/tmp", "**/dist", "**/coverage"]
 }
