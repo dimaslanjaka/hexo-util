@@ -272,7 +272,6 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "change-case": "^5.4.4",
     "cross-spawn": "^7.0.3",
     "highlight.js": "^11.6.0",
     "htmlparser2": "^10.0.0",

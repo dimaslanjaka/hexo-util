@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import fs from 'node:fs';
 import * as hexoUtilSrc from '../lib/index.js';
 
 describe('Test import module in dual environment', function() {
@@ -23,6 +24,11 @@ describe('Test import module in dual environment', function() {
     expect(lib.url_for).to.be.a('function');
     const result = lib.url_for('test/test-import.mjs');
     expect(result).to.be.a('string');
+  });
+
+  it('does not require the ESM-only change-case package from CJS output', () => {
+    const cjsSource = fs.readFileSync(new URL('../dist/camel_case_keys.cjs', import.meta.url), 'utf8');
+    expect(cjsSource).not.to.match(/require\(['"]change-case['"]\)/);
   });
 
   it('imports ESM modules and exposes all public methods', async () => {

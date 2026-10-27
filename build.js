@@ -25,7 +25,7 @@ const log = function (...args) {
  * Packages that should be bundled (not marked as external)
  * @type {string[]}
  */
-const bundledPackages = [];
+const bundledPackages = ['change-case'];
 
 /**
  * All dependencies except those in bundledPackages will be marked as external
@@ -53,10 +53,11 @@ function buildTsup() {
       }
     },
     entry: ['lib/**/*.ts'],
-    splitting: true,
+    splitting: false,
     treeshake: true,
     bundle: false,
     shims: true,
+    noExternal: ['change-case'],
     sourcemap: true,
     removeNodeProtocol: true,
     clean: true,

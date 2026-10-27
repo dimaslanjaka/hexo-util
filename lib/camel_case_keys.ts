@@ -1,6 +1,12 @@
-import * as changeCase from 'change-case';
+function camelCase(str: string) {
+  return str
+    .replace(/([-_][a-z])/gi, '$1')
+    .replace(/-(\w)/g, (_, c) => c.toUpperCase())
+    .replace(/_(\w)/g, (_, c) => c.toUpperCase())
+    .replace(/^(.)/, (_, c) => c.toLowerCase());
+}
 
-const { camelCase } = changeCase;
+const { camelCase: _unused } = { camelCase }; // Keep for reference if needed, but we use local now
 
 function getter(key: string) {
   return function() {
