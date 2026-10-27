@@ -6,8 +6,6 @@ function camelCase(str: string) {
     .replace(/^(.)/, (_, c) => c.toLowerCase());
 }
 
-const { camelCase: _unused } = { camelCase }; // Keep for reference if needed, but we use local now
-
 function getter(key: string) {
   return function() {
     return this[key];

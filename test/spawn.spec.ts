@@ -12,7 +12,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const isWindows = process.platform === 'win32';
 // On Windows, run `type` through cmd.exe so a `type` script on PATH (e.g. Cygwin) is not picked up
 const catCommand = isWindows ? 'cmd.exe' : 'cat';
-const catArgs = (args: string[]): string[] => isWindows ? ['/c', 'type', ...args] : args;
+function catArgs(args: string[]): string[] {
+  return isWindows ? ['/c', 'type', ...args] : args;
+}
 
 describe('spawn', () => {
   const fixturePath = join(__dirname, 'spawn_test.txt');

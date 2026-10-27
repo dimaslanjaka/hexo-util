@@ -124,6 +124,7 @@ function highlight(str: string, options: InternalHighlightOptions) {
   // Ensure the language is registered (e.g. 'plaintext') before highlighting
   if (!hljs.getLanguage(lang)) {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
       const mod = require(`highlight.js/lib/languages/${aliasesLang || lang}`);
       hljs.registerLanguage(lang, mod.default || mod);
     } catch {
