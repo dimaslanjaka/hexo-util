@@ -2,7 +2,7 @@
 ## Releases
 | version | tarball url |
 | :--- | :--- |
-| latest | https://github.com/dimaslanjaka/hexo-util/raw/faade4d/release/hexo-util.tgz |
+| latest | https://github.com/dimaslanjaka/hexo-util/raw/b395f86/release/hexo-util.tgz |
 | latest | https://github.com/dimaslanjaka/hexo-util/raw/monorepo/release/hexo-util.tgz |
 
 use this tarball with `resolutions`:
