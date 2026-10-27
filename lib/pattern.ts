@@ -2,10 +2,12 @@ import escapeRegExp from './escape_regexp.js';
 
 const rParam = /([:*])([\w?]*)?/g;
 
-class Pattern {
-  match: (str: string) => unknown;
+type PatternMatch = RegExpMatchArray | Record<string, any> | boolean | null | undefined;
 
-  constructor(rule: Pattern | ((str: string) => unknown) | RegExp | string) {
+class Pattern {
+  match!: (str: string) => PatternMatch;
+
+  constructor(rule: Pattern | ((str: string) => PatternMatch) | RegExp | string) {
     if (rule instanceof Pattern) {
       return rule;
     } else if (typeof rule === 'function') {
@@ -29,7 +31,7 @@ function regexFilter(rule: RegExp) {
 }
 
 function stringFilter(rule: string) {
-  const params = [];
+  const params: string[] = [];
 
   const regex = escapeRegExp(rule)
     .replace(/\\([*?])/g, '$1')
@@ -58,7 +60,7 @@ function stringFilter(rule: string) {
     const match = str.match(regex);
     if (!match) return;
 
-    const result = {};
+    const result: Record<string, string | undefined> = {};
 
     for (let i = 0, len = match.length; i < len; i++) {
       const name = params[i - 1];
