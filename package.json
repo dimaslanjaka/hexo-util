@@ -6,200 +6,6 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts"
-    },
-    "./dist/CacheMapper": {
-      "import": "./dist/CacheMapper.js",
-      "require": "./dist/CacheMapper.cjs",
-      "types": "./dist/CacheMapper.ts"
-    },
-    "./dist/cache": {
-      "import": "./dist/cache.js",
-      "require": "./dist/cache.cjs",
-      "types": "./dist/cache.ts"
-    },
-    "./dist/cache_stream": {
-      "import": "./dist/cache_stream.js",
-      "require": "./dist/cache_stream.cjs",
-      "types": "./dist/cache_stream.ts"
-    },
-    "./dist/camel_case_keys": {
-      "import": "./dist/camel_case_keys.js",
-      "require": "./dist/camel_case_keys.cjs",
-      "types": "./dist/camel_case_keys.ts"
-    },
-    "./dist/color": {
-      "import": "./dist/color.js",
-      "require": "./dist/color.cjs",
-      "types": "./dist/color.ts"
-    },
-    "./dist/cross_dirname": {
-      "import": "./dist/cross_dirname.js",
-      "require": "./dist/cross_dirname.cjs",
-      "types": "./dist/cross_dirname.ts"
-    },
-    "./dist/decode_url": {
-      "import": "./dist/decode_url.js",
-      "require": "./dist/decode_url.cjs",
-      "types": "./dist/decode_url.ts"
-    },
-    "./dist/deep_merge": {
-      "import": "./dist/deep_merge.js",
-      "require": "./dist/deep_merge.cjs",
-      "types": "./dist/deep_merge.ts"
-    },
-    "./dist/encode_url": {
-      "import": "./dist/encode_url.js",
-      "require": "./dist/encode_url.cjs",
-      "types": "./dist/encode_url.ts"
-    },
-    "./dist/escape_diacritic": {
-      "import": "./dist/escape_diacritic.js",
-      "require": "./dist/escape_diacritic.cjs",
-      "types": "./dist/escape_diacritic.ts"
-    },
-    "./dist/escape_html": {
-      "import": "./dist/escape_html.js",
-      "require": "./dist/escape_html.cjs",
-      "types": "./dist/escape_html.ts"
-    },
-    "./dist/escape_regexp": {
-      "import": "./dist/escape_regexp.js",
-      "require": "./dist/escape_regexp.cjs",
-      "types": "./dist/escape_regexp.ts"
-    },
-    "./dist/full_url_for": {
-      "import": "./dist/full_url_for.js",
-      "require": "./dist/full_url_for.cjs",
-      "types": "./dist/full_url_for.ts"
-    },
-    "./dist/gravatar": {
-      "import": "./dist/gravatar.js",
-      "require": "./dist/gravatar.cjs",
-      "types": "./dist/gravatar.ts"
-    },
-    "./dist/hash": {
-      "import": "./dist/hash.js",
-      "require": "./dist/hash.cjs",
-      "types": "./dist/hash.ts"
-    },
-    "./dist/highlight": {
-      "import": "./dist/highlight.js",
-      "require": "./dist/highlight.cjs",
-      "types": "./dist/highlight.ts"
-    },
-    "./dist/highlight_alias": {
-      "import": "./dist/highlight_alias.js",
-      "require": "./dist/highlight_alias.cjs",
-      "types": "./dist/highlight_alias.ts"
-    },
-    "./dist/highlight_alias.json": "./highlight_alias.json",
-    "./dist/highlight_shared": {
-      "import": "./dist/highlight_shared.js",
-      "require": "./dist/highlight_shared.cjs",
-      "types": "./dist/highlight_shared.ts"
-    },
-    "./dist/html_tag": {
-      "import": "./dist/html_tag.js",
-      "require": "./dist/html_tag.cjs",
-      "types": "./dist/html_tag.ts"
-    },
-    "./dist/index": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.ts"
-    },
-    "./dist/is_external_link": {
-      "import": "./dist/is_external_link.js",
-      "require": "./dist/is_external_link.cjs",
-      "types": "./dist/is_external_link.ts"
-    },
-    "./dist/json_stringify_circular": {
-      "import": "./dist/json_stringify_circular.js",
-      "require": "./dist/json_stringify_circular.cjs",
-      "types": "./dist/json_stringify_circular.ts"
-    },
-    "./dist/pattern": {
-      "import": "./dist/pattern.js",
-      "require": "./dist/pattern.cjs",
-      "types": "./dist/pattern.ts"
-    },
-    "./dist/permalink": {
-      "import": "./dist/permalink.js",
-      "require": "./dist/permalink.cjs",
-      "types": "./dist/permalink.ts"
-    },
-    "./dist/pretty_urls": {
-      "import": "./dist/pretty_urls.js",
-      "require": "./dist/pretty_urls.cjs",
-      "types": "./dist/pretty_urls.ts"
-    },
-    "./dist/prism": {
-      "import": "./dist/prism.js",
-      "require": "./dist/prism.cjs",
-      "types": "./dist/prism.ts"
-    },
-    "./dist/relative_url": {
-      "import": "./dist/relative_url.js",
-      "require": "./dist/relative_url.cjs",
-      "types": "./dist/relative_url.ts"
-    },
-    "./dist/slugize": {
-      "import": "./dist/slugize.js",
-      "require": "./dist/slugize.cjs",
-      "types": "./dist/slugize.ts"
-    },
-    "./dist/spawn": {
-      "import": "./dist/spawn.js",
-      "require": "./dist/spawn.cjs",
-      "types": "./dist/spawn.ts"
-    },
-    "./dist/strip_html": {
-      "import": "./dist/strip_html.js",
-      "require": "./dist/strip_html.cjs",
-      "types": "./dist/strip_html.ts"
-    },
-    "./dist/strip_indent": {
-      "import": "./dist/strip_indent.js",
-      "require": "./dist/strip_indent.cjs",
-      "types": "./dist/strip_indent.ts"
-    },
-    "./dist/toc_obj": {
-      "import": "./dist/toc_obj.js",
-      "require": "./dist/toc_obj.cjs",
-      "types": "./dist/toc_obj.ts"
-    },
-    "./dist/truncate": {
-      "import": "./dist/truncate.js",
-      "require": "./dist/truncate.cjs",
-      "types": "./dist/truncate.ts"
-    },
-    "./dist/types": {
-      "import": "./dist/types.js",
-      "require": "./dist/types.cjs",
-      "types": "./dist/types.ts"
-    },
-    "./dist/unescape_html": {
-      "import": "./dist/unescape_html.js",
-      "require": "./dist/unescape_html.cjs",
-      "types": "./dist/unescape_html.ts"
-    },
-    "./dist/url_for": {
-      "import": "./dist/url_for.js",
-      "require": "./dist/url_for.cjs",
-      "types": "./dist/url_for.ts"
-    },
-    "./dist/word_wrap": {
-      "import": "./dist/word_wrap.js",
-      "require": "./dist/word_wrap.cjs",
-      "types": "./dist/word_wrap.ts"
-    },
-    "./highlight_alias.json": "./highlight_alias.json"
-  },
   "scripts": {
     "build-cjs": "tsc -p tsconfig.cjs.json",
     "build-esm": "tsc -p tsconfig.esm.json",
@@ -217,7 +23,8 @@
     "test-cov": "c8 --reporter=lcovonly npm run test-all",
     "postinstall": "npm run build-hightlight",
     "watch": "npx -y nodemon --delay 3 --ignore lib/highlight_alias.ts --watch build.js --watch lib --ext js,ts --exec \"yarn build > build.log 2>&1 && yarn workspace hexo-site run build\"",
-    "pack": "npx -y tarball-packer --yarn --filename hexo-util --normalize-resolutions"
+    "pack": "npx -y tarball-packer --yarn --filename hexo-util --normalize-resolutions",
+    "prepare": "husky"
   },
   "files": [
     "dist/**",
@@ -265,6 +72,8 @@
     "highlightjs-solidity": "^2.0.6",
     "html-entities": "^2.3.3",
     "html-validate": "^11.17.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.0",
     "mocha": "^11.7.5",
     "rewire": "^9.0.1",
     "ts-node": "^10.9.1",

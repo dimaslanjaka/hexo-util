@@ -1,0 +1,3 @@
+#!/bin/sh
+node scripts/remove-exports-packagejson.mjs
+npx lint-staged
